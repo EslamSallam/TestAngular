@@ -7,7 +7,7 @@ import { Catalog } from "./catalog/catalog";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SiteHeader,Home],
+  imports: [RouterOutlet, SiteHeader, Catalog],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
