@@ -1,4 +1,14 @@
+
+
 /* You can add global styles to this file, and also import other style files */
+.bold {
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+}
+
 body {
   background-color: #fff;
   font-family: Arial, Helvetica, sans-serif;
@@ -119,3 +129,4 @@ input {
   background-color: #f590c4;
   color: #aaa;
 }
+
