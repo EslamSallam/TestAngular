@@ -1,10 +1,11 @@
 import { CurrencyPipe, NgForOf, NgIf, NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { IProduct } from './product.model';
+import { ProductDetails } from "../product-details/product-details";
 
 @Component({
   selector: 'bot-catalog',
-  imports: [CurrencyPipe, NgForOf, NgIf, NgClass, NgStyle],
+  imports: [ NgForOf, ProductDetails],
   templateUrl: './catalog.html',
   styleUrls: ['./catalog.scss'],
   
@@ -13,6 +14,7 @@ export class Catalog
 {
   products:any;
   filter :string = '';
+  cart : IProduct[] = [];
   constructor()
   {
       this.products = [
@@ -190,6 +192,11 @@ export class Catalog
         discount: 0,
       },
     ];
+  }
+
+  AddToCart(p:IProduct){
+    this.cart.push(p);
+    console.log('Product added to cart: ' + p.name);
   }
 
   getImageUrl(p:IProduct): string
