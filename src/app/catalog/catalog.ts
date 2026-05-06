@@ -4,11 +4,11 @@ import { IProduct } from './product.model';
 import { ProductDetails } from "../product-details/product-details";
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service'
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink,RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'bot-catalog',
-  imports: [NgForOf, ProductDetails, RouterLink],
+  imports: [NgForOf, ProductDetails, RouterLink, RouterLinkActive],
   templateUrl: './catalog.html',
   styleUrls: ['./catalog.scss'],
   
@@ -31,7 +31,7 @@ export class Catalog
         this.products = products;
       }
     );
-    this.route.params.subscribe((p) => {
+    this.route.queryParams.subscribe((p) => {
       this.filter = p['category'] ?? '';
     })
     console.log(this.filter);

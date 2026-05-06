@@ -8,7 +8,7 @@ export const routes: Routes = [
         path: 'home',component: Home, title : "Home - Eslam's shos"
     },
     {
-        path: 'catalog/:category',component: Catalog
+        path: 'catalog',component: Catalog
     },
     {
         path: 'cart',component: CartComponent
