@@ -2,12 +2,13 @@ import { CurrencyPipe, NgForOf, NgIf, NgClass, NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { IProduct } from './product.model';
 import { ProductDetails } from "../product-details/product-details";
-import { Cart } from '../cart';
+import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service'
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'bot-catalog',
-  imports: [ NgForOf, ProductDetails],
+  imports: [NgForOf, ProductDetails, RouterLink],
   templateUrl: './catalog.html',
   styleUrls: ['./catalog.scss'],
   
@@ -18,7 +19,7 @@ export class Catalog
   filter :string = '';
   cart : IProduct[] = [];
   // private Cartsvc: Cart = inject(Cart);
-  constructor(private Cartsvc: Cart,private productSVC : ProductService)
+  constructor(private Cartsvc: CartService,private productSVC : ProductService,private router : Router,private route : ActivatedRoute)
   {
       
   }
@@ -26,15 +27,19 @@ export class Catalog
   ngOnInit()
   {
     this.productSVC.GetProducts().subscribe(
-        (products) => {
-          this.products = products;
-        }
+      (products) => {
+        this.products = products;
+      }
     );
-    console.log('completed');
+    this.route.params.subscribe((p) => {
+      this.filter = p['category'] ?? '';
+    })
+    console.log(this.filter);
   }
 
   AddToCart(p:IProduct){
     this.Cartsvc.add(p);
+    this.router.navigate(["/cart"]);
   }
 
   getImageUrl(p:IProduct): string
